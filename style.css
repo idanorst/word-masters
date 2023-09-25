@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6rem;
+    border-bottom: 2px solid black;
+    font-size: 0.8rem;
+}
+
+.guess-board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.word-container {
+    margin-top: 3rem;
+    width: 300px;
+}
+
+.word-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+input[type=text] {
+    text-align: center;
+    caret-color: transparent;
+}
+
+input[type=text]:focus {
+    outline: none;
+    text-align: center;
+}
+
+.letter-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgb(162, 162, 162);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.all-correct {
+    background-color: green;
+}
+
+.correct-letter {
+    background-color: yellow;
+}
+
+.wrong {
+    background-color: grey;
+}
+
+.not-valid {
+    border-color: red; 
+}
+
+.blocked {
+    cursor: none;
+    pointer-events: none;
+
+}
+
+.celebration {
+    animation: celebration 2.5s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes celebration {
+    100%, 0% {
+        color: rgb(255,0,0);
+    }
+    8% {
+        color: rgb(255,127,0);
+    }
+    16% {
+        color: rgb(255,255,0);
+    }
+    25% {
+        color: rgb(127, 255, 0);
+    }
+    33% {
+        color: rgb(0, 255, 0);
+    }
+    41% {
+        color: rgb(0, 255, 127);
+    }
+    50% {
+        color: rgb(0, 255, 255);
+    }
+    58% {
+        color: rgb(0, 127, 255);
+    }
+    66% {
+        color: rgb(0, 0, 255);
+    }
+    75% {
+        color: rgb(127, 0, 255);
+    }
+    83% {
+        color: rgb(255, 0, 255);
+    }
+    91% {
+        color: rgb(255, 0, 127);
+    }
+}
+
+

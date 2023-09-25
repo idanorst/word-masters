@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Masters</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="word.png">
+</head>
+<body>
+    <header>
+        <h1 class="header">Word Masters</h1>
+    </header>
+    <main class="guess-board">
+        <table class="word-container">
+            <tr class="word-row" id="0">
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4"> 
+                </td>
+            </tr>
+            <tr class="word-row blocked" id="1">
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4"> 
+                </td>
+            </tr>
+            <tr class="word-row blocked" id="2">
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4"> 
+                </td>
+            </tr>
+            <tr class="word-row blocked" id="3">
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4"> 
+                </td>
+            </tr>
+            <tr class="word-row blocked" id="4">
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4"> 
+                </td>
+            </tr>
+            <tr class="word-row blocked" id="5">
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2"> 
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                </td>
+                <td>
+                    <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4"> 
+                </td>
+            </tr>
+        </table>
+        <!-- <section class="word-container">
+            <div class="word-row" id="0">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4">
+            </div>
+            <div class="word-row" id="1" autocomplete="off">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4">
+            </div>
+            <div class="word-row" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4">
+            </div>
+            <div class="word-row" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4">
+            </div>
+            <div class="word-row" id="4">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4">
+            </div>
+            <div class="word-row" id="5">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="0"> 
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="1">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="2">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="3">
+                <input type=text class="letter-box" maxlength="1" autocomplete="off" id="4">
+            </div>
+        </section> -->
+    </main>
+    <script src="wordle.js"></script>
+</body>
+</html>
