@@ -38,16 +38,22 @@ function isLetter(letter) {
     return /^[a-zA-Z]$/.test(letter)
 }
 
+function startClick(){
+    console.log("clicked")
+    document.querySelector(".pop-up").style.display = "none"
+}
+
 function init() {
     const WORD_URL = "https://words.dev-apis.com/word-of-the-day"
     const RANDOM_WORD_URL = "https://words.dev-apis.com/word-of-the-day?random=1"
     const VALIDATE_WORD_URL = "https://words.dev-apis.com/validate-word"
 
+
     let valid = true
 
     let correctWord = ''
     
-    getWord(WORD_URL).then(x => {
+    getWord(RANDOM_WORD_URL).then(x => {
         correctWord = x
         console.log(correctWord)
     })
@@ -56,6 +62,9 @@ function init() {
     let currentRow = 0
     let count = 0
     let letterDict = {}
+
+    const startButton = document.querySelector(".start-btn")
+    startButton.addEventListener("click", startClick)
 
     const container = document.getElementsByClassName("word-container")[0]
     container.onkeyup = function(e) {
@@ -69,7 +78,7 @@ function init() {
         let myLength = target.value.length
         if (myLength >= 1) {
             if (correctWord.includes(e.target.value)){
-                if (parseInt(e.target.id) === correctWord.indexOf(e.target.value) || (countOccurences(correctWord, e.target.value) > 1 && parseInt(e.target.id)=== getPosition(correctWord, e.target.value, e.target.id))) {
+                if (parseInt(e.target.id) === correctWord.indexOf(e.target.value)) {
                     letterDict[e.target.id] = "ac"
                 } else if (parseInt(e.target.id) != correctWord.indexOf(e.target.value)) {
                     letterDict[e.target.id] = "cl"
@@ -77,7 +86,7 @@ function init() {
             } else {
                 letterDict[e.target.id] = "w"
             }
-            guessedWord += e.target.value
+            guessedWord += e.target.value.toLowerCase()
             count += 1
             if (!isLetter(e.key)) {
                 e.preventDefault()
@@ -111,16 +120,20 @@ function init() {
                             } 
                         }
                     })
+                    parentNode.classList.add("blocked")
                     if (guessedWord === correctWord) {
                         alert("Correct! You won!")
                         document.querySelector("header").classList.add("celebration")
+                        document.querySelector(".guess-board").classList.add("blocked")
                     } 
                     if (guessedWord != correctWord && parentNode.id === '5') {
                         alert(`Sorry, you lost! The correct word was ${correctWord}.`)
+                        document.querySelector(".guess-board").classList.add("blocked")
                     }
                 }
                 if (!next && row.parentNode.rows[row.rowIndex + 1]) {
                     row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
+                    row.parentNode.rows[row.rowIndex + 1].classList.remove("blocked")
                 }
             }
         } else if (myLength === 0) {
