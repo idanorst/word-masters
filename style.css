@@ -81,6 +81,28 @@ p {
     width: 100%;
 }
 
+.table-container {
+    display: flex;
+    flex-direction: row;
+    width: 350px;
+}
+
+.row-numbers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 30px;
+    margin-top: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.row-numbers > p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
 .word-container {
     margin-top: 3rem;
     width: 300px;

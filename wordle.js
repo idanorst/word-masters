@@ -68,7 +68,7 @@ function init() {
 
     const container = document.getElementsByClassName("word-container")[0]
     container.onkeyup = function(e) {
-        if (parseInt(e.target.parentNode.parentNode.id) != currentRow) {
+        if (parseInt(e.target.parentNode.parentNode.id) != currentRow || parseInt(e.target.id) === 0) {
             guessedWord = ''
             currentRow = e.target.parentNode.parentNode.id
             count = 0
@@ -77,16 +77,32 @@ function init() {
         let target = e.srcElement || e.target
         let myLength = target.value.length
         if (myLength >= 1) {
+            guessedWord += e.target.value.toLowerCase()
             if (correctWord.includes(e.target.value)){
-                if (parseInt(e.target.id) === correctWord.indexOf(e.target.value)) {
-                    letterDict[e.target.id] = "ac"
-                } else if (parseInt(e.target.id) != correctWord.indexOf(e.target.value)) {
-                    letterDict[e.target.id] = "cl"
+                if (countOccurences(correctWord, e.target.value) > 1) {
+                    if (parseInt(e.target.id) === correctWord.indexOf(e.target.value)) {
+                        letterDict[e.target.id] = "ac"
+                    } else if (parseInt(e.target.id) === getPosition(correctWord, e.target.value, 2)){
+                        letterDict[e.target.id] = "ac"
+                    } else if (parseInt(e.target.id) != correctWord.indexOf(e.target.value) ){
+                        letterDict[e.target.id] = "cl"
+                    }
+                } else {
+                    if (parseInt(e.target.id) === correctWord.indexOf(e.target.value)) {
+                        console.log("ac")
+                        letterDict[e.target.id] = "ac"
+                    } else if (parseInt(e.target.id) != correctWord.indexOf(e.target.value)) {
+                        if (guessedWord.includes(e.target.value) && countOccurences(guessedWord, e.target.value) > 1) {
+                            letterDict[e.target.id] = "w"
+                        } else {
+                            letterDict[e.target.id] = "cl"
+                        }
+                    }
                 }
+                
             } else {
                 letterDict[e.target.id] = "w"
             }
-            guessedWord += e.target.value.toLowerCase()
             count += 1
             if (!isLetter(e.key)) {
                 e.preventDefault()
@@ -117,11 +133,19 @@ function init() {
                                 } else if (letterDict[i] === "w") {
                                     parentNode.children[i].children[0].classList.add("wrong")
                                 }
+                            }
+                            if (guessedWord === correctWord) {
+                                alert("Correct! You won!")
+                                document.querySelector("header").classList.add("celebration")
+                                document.querySelector(".guess-board").classList.add("blocked")
+                            } 
+                            if (guessedWord != correctWord && parentNode.id === '5') {
+                                alert(`Sorry, you lost! The correct word was ${correctWord}.`)
+                                document.querySelector(".guess-board").classList.add("blocked")
                             } 
                         }
                     })
-                    parentNode.classList.add("blocked")
-                    if (guessedWord === correctWord) {
+                   /*  if (guessedWord === correctWord) {
                         alert("Correct! You won!")
                         document.querySelector("header").classList.add("celebration")
                         document.querySelector(".guess-board").classList.add("blocked")
@@ -129,7 +153,7 @@ function init() {
                     if (guessedWord != correctWord && parentNode.id === '5') {
                         alert(`Sorry, you lost! The correct word was ${correctWord}.`)
                         document.querySelector(".guess-board").classList.add("blocked")
-                    }
+                    } */
                 }
                 if (!next && row.parentNode.rows[row.rowIndex + 1]) {
                     row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
@@ -138,16 +162,13 @@ function init() {
             }
         } else if (myLength === 0) {
             guessedWord = guessedWord.slice(0, guessedWord.length - 1)
-            count -= 1
             let previous = target.parentNode
             if (previous.children[0].classList.contains("not-valid")) {
                 previous.children[0].classList.remove("not-valid")
             }
             while (previous = previous.previousElementSibling) {
-                if (previous === null) {
-                    break
-                }
                 if (previous.tagName.toLowerCase() === "td") {
+                    count -= 1
                     previous.children[0].focus()
                     break
                 }
