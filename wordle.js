@@ -135,13 +135,22 @@ function init() {
                                 }
                             }
                             if (guessedWord === correctWord) {
-                                alert("Correct! You won!")
                                 document.querySelector("header").classList.add("celebration")
+                                document.querySelector(".winning").style.display = "block"
                                 document.querySelector(".guess-board").classList.add("blocked")
                             } 
                             if (guessedWord != correctWord && parentNode.id === '5') {
-                                alert(`Sorry, you lost! The correct word was ${correctWord}.`)
+                                document.querySelector(".correct-word").innerHTML = `${correctWord}`
+                                document.querySelector(".lost").style.display = "block"
                                 document.querySelector(".guess-board").classList.add("blocked")
+                            }
+                            if (!next && row.parentNode.rows[row.rowIndex + 1]) {
+                                setTimeout(function() {
+                                    row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
+                                    row.parentNode.rows[row.rowIndex + 1].classList.remove("blocked")
+                                }, 1000)
+                                /* row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
+                                row.parentNode.rows[row.rowIndex + 1].classList.remove("blocked") */
                             } 
                         }
                     })
@@ -155,10 +164,14 @@ function init() {
                         document.querySelector(".guess-board").classList.add("blocked")
                     } */
                 }
-                if (!next && row.parentNode.rows[row.rowIndex + 1]) {
-                    row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
+                /* if (!next && row.parentNode.rows[row.rowIndex + 1]) {
+                    setTimeout(function() {
+                        row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
+                        row.parentNode.rows[row.rowIndex + 1].classList.remove("blocked")
+                    }, 1000)
+                    /* row.parentNode.rows[row.rowIndex + 1].children[0].children[0].focus()
                     row.parentNode.rows[row.rowIndex + 1].classList.remove("blocked")
-                }
+                } */
             }
         } else if (myLength === 0) {
             guessedWord = guessedWord.slice(0, guessedWord.length - 1)
