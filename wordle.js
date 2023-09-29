@@ -19,6 +19,7 @@ async function init() {
     let currentRow = 0
     let count = 0
     let letterDict = {}
+    let value4 = ''
 
     const startButton = document.querySelector(".start-btn")
     startButton.addEventListener("click", startClick)
@@ -37,11 +38,12 @@ async function init() {
         
         let target = e.srcElement || e.target
         let myLength = target.value.length
+        
+        
         if (myLength >= 1) {
-            let value4 = ''
-            if (parseInt(target.id) === 4) {
+            /* let value4 = '' */
+            if (parseInt(target.id) === 4 && correctWord.includes(target.value)) {
                 value4 = target.value
-                console.log(value4)
             }
             if (target.parentNode.nextElementSibling != null && target.parentNode.nextElementSibling.children[0].value != "") {
                 let tempDict = {}
@@ -53,6 +55,7 @@ async function init() {
                 } else {
                     for (let i = 0; i < 5; i++) {
                         tempDict[i] = target.parentNode.parentNode.children[i].children[0].value
+                        
                     }
                 }
                 guessedWord = ''
@@ -60,8 +63,10 @@ async function init() {
                     guessedWord += tempDict[i]
                 }
             } else if (guessedWord.length < 5) {
+                console.log(value4)
                 guessedWord += target.value.toLowerCase()
             }
+            console.log(guessedWord)
             if (guessedWord.length === 5) {
                 let marked = {}
                 for (let i = 0; i < guessedWord.length; i++) {
