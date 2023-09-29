@@ -42,7 +42,7 @@ async function init() {
         
         if (myLength >= 1) {
             /* let value4 = '' */
-            if (parseInt(target.id) === 4 && correctWord.includes(target.value)) {
+            if (parseInt(target.id) === 4 && correctWord.indexOf(target.value) === 4) {
                 value4 = target.value
             }
             if (target.parentNode.nextElementSibling != null && target.parentNode.nextElementSibling.children[0].value != "") {
