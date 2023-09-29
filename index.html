@@ -12,6 +12,9 @@
         <h1 class="header">Word Masters</h1>
     </header>
     <main class="guess-board">
+        <div class="info-bar">
+            <div class="spiral">🌀</div>
+        </div>
         <div class="pop-up">
             <p>Welcome to this game 🎲</p>
             <p>The goal for the game is to guess the right word. You have 6 tries in total.</p>
@@ -30,10 +33,16 @@
             
         </div>
         <div class="result-popup winning">
+            <button class='close-button' onclick=closeWinningPopup()>
+                &times;
+            </button>
             <p>Congrats, you won!</p>
             <p class="smiley">🥳</p>
         </div>
         <div class="result-popup lost">
+            <button class='close-button' onclick=closeLosingPopup()>
+                &times;
+            </button>
             <p>I'm sorry, you lost.</p>
             <p class="smiley">😿</p>
             <p>The correct word was <span class="correct-word"></span>.</p>
