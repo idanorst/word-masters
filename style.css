@@ -157,6 +157,10 @@ input[type=text]:focus {
     animation: flash 1s;
 }
 
+.invalid {
+    border: 1.5px solid red;
+}
+
 .blocked {
     cursor: none;
     pointer-events: none;
@@ -241,6 +245,19 @@ input[type=text]:focus {
 .spiral {
     font-size: 40px;
     animation: spin 1.5s linear infinite;
+}
+
+.info-bar {
+    position: absolute;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes celebration {

@@ -1,86 +1,17 @@
 const loadingDiv = document.querySelector(".info-bar")
 
-async function getWord(url) {
-    const response = await fetch(url, {method: "GET"})
-    const wordObject = await response.json()
-    const word = wordObject.word
-    return word
-}
-
-async function validateWord(url, wordGuess) {
-    isLoading = true
-    setIsLoading(isLoading)
-    try {
-        const response = await fetch(url, {
-            method: "POST", 
-            body: JSON.stringify({
-                word: wordGuess
-            })
-        })
-        const validation = await response.json()
-        return validation
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-function setValidation(validation) {
-    valid = validation
-    isLoading = false
-    setLoading(isLoading)
-    return valid
-}
-
-function getPosition(word, letter, index) {
-    return word.split(letter, index).join(letter).length
-}
-
-const countOccurences = (word, search) => {
-    return word.split(search).length - 1
-}
-
-// Function to test wether the user is typing a single letter
-function isLetter(letter) {
-    return /^[a-zA-Z]$/.test(letter)
-}
-
-function startClick(){
-    document.querySelector(".pop-up").style.display = "none"
-}
-
-function closeWinningPopup() {
-    document.querySelector(".word-container").classList.add("blocked")
-    console.log("blocked")
-    document.querySelector(".winning").style.display = "none"
-}
-
-function closeLosingPopup() {
-    document.querySelector(".word-container").classList.add("blocked")
-    document.querySelector(".lost").style.display = "none"
-    console.log("blocked")
-}
-
-function setLoading(isLoading) {
-    loadingDiv.classList.toggle("hidden", !isLoading)
-}
-
-
-function init() {
+async function init() {
     const WORD_URL = "https://words.dev-apis.com/word-of-the-day"
     const RANDOM_WORD_URL = "https://words.dev-apis.com/word-of-the-day?random=1"
     const VALIDATE_WORD_URL = "https://words.dev-apis.com/validate-word"
-    /* const loadingDiv = document.querySelector(".info-bar") */
-
-
-    let valid = true
     let isLoading = true
+    let done = false
 
-    let correctWord = ''
-    
-    getWord(RANDOM_WORD_URL).then(x => {
-        correctWord = x
-        console.log(correctWord)
-    })
+    // getting the word
+    const response = await fetch(WORD_URL)
+    const wordObject = await response.json()
+    const correctWord = wordObject.word
+
     isLoading = false
     setLoading(isLoading)
 
@@ -94,19 +25,35 @@ function init() {
 
     const container = document.getElementsByClassName("word-container")[0]
     container.onkeyup = function(e) {
+        if (done) {
+            return
+        }
         if (parseInt(e.target.parentNode.parentNode.id) != currentRow || parseInt(e.target.id) === 0) {
             guessedWord = ''
             currentRow = e.target.parentNode.parentNode.id
             count = 0
             letterDict = {}
         }
+        
         let target = e.srcElement || e.target
         let myLength = target.value.length
         if (myLength >= 1) {
-            if (target.parentNode.nextElementSibling != null && target.parentNode.nextElementSibling.children[0].value != "" && target.id != 4) {
+            let value4 = ''
+            if (parseInt(target.id) === 4) {
+                value4 = target.value
+                console.log(value4)
+            }
+            if (target.parentNode.nextElementSibling != null && target.parentNode.nextElementSibling.children[0].value != "") {
                 let tempDict = {}
-                for (let i = 0; i < 5; i++) {
-                    tempDict[i] = target.parentNode.parentNode.children[i].children[0].value
+                if (value4 != null) {
+                    tempDict[4] = value4
+                    for (let i = 0; i < 4; i++) {
+                        tempDict[i] = target.parentNode.parentNode.children[i].children[0].value
+                    }
+                } else {
+                    for (let i = 0; i < 5; i++) {
+                        tempDict[i] = target.parentNode.parentNode.children[i].children[0].value
+                    }
                 }
                 guessedWord = ''
                 for (let i = 0; i < 5; i++) {
@@ -116,6 +63,7 @@ function init() {
                 guessedWord += target.value.toLowerCase()
             }
             if (guessedWord.length === 5) {
+                let marked = {}
                 for (let i = 0; i < guessedWord.length; i++) {
                     if (correctWord.includes(guessedWord[i])) {
                         if (countOccurences(correctWord, guessedWord[i]) > 1) {
@@ -129,13 +77,15 @@ function init() {
                                 letterDict[i] = "cl"
                             }
                         } else {
-                            if (i === correctWord.indexOf(guessedWord[i])) {
+                            if (i === correctWord.indexOf(guessedWord[i]) && !marked[guessedWord[i]]) {
                                 letterDict[i] = "ac"
+                                marked[guessedWord[i]] = true 
                             } else if (i != correctWord.indexOf(guessedWord[i])) {
-                                if (guessedWord.includes(guessedWord[i]) && countOccurences(guessedWord, guessedWord[i]) > 1) {
-                                    letterDict[i] = "w"
-                                } else {
+                                if (correctWord.includes(guessedWord[i]) && !marked[guessedWord[i]]) {
                                     letterDict[i] = "cl"
+                                    marked[guessedWord[i]] = true
+                                } else{
+                                    letterDict[i] = "w"
                                 }
                             }
     
@@ -145,33 +95,7 @@ function init() {
                     }
                     
                 }
-            } else {
-                if (correctWord.includes(target.value)){
-                    if (countOccurences(correctWord, target.value) > 1) {
-                        if (parseInt(target.id) === correctWord.indexOf(target.value)) {
-                            letterDict[target.id] = "ac"
-                        } else if (parseInt(target.id) === getPosition(correctWord, target.value, 2)){
-                            letterDict[target.id] = "ac"
-                        } else if (parseInt(target.id) != correctWord.indexOf(target.value) ){
-                            letterDict[target.id] = "cl"
-                        }
-                    } else {
-                        if (parseInt(target.id) === correctWord.indexOf(target.value)) {
-                            letterDict[target.id] = "ac"
-                        } else if (parseInt(target.id) != correctWord.indexOf(target.value)) {
-                            if (guessedWord.includes(target.value) && countOccurences(guessedWord, target.value) > 1) {
-                                letterDict[target.id] = "w"
-                            } else {
-                                letterDict[target.id] = "cl"
-                            }
-                        }
-                    }
-                    
-                } else {
-                    letterDict[target.id] = "w"
-                }
-            }
-                
+            }/*  else { */
             count = Object.keys(letterDict).length
             
             if (!isLetter(e.key)) {
@@ -208,14 +132,15 @@ function init() {
                                 }
                             }
                             parentNode.classList.add("blocked")
-                            console.log("blocked row")
                             if (guessedWord === correctWord) {
                                 document.querySelector("header").classList.add("celebration")
                                 document.querySelector(".winning").style.display = "block"
+                                done = true
                             } 
                             if (guessedWord != correctWord && parentNode.id === '5') {
                                 document.querySelector(".correct-word").innerHTML = `${correctWord}`
                                 document.querySelector(".lost").style.display = "block"
+                                done = true
                             }
                             if (!next && row.parentNode.rows[row.rowIndex + 1]) {
                                 setTimeout(function() {
@@ -242,6 +167,63 @@ function init() {
             }
 
         }
+    }
+
+    async function validateWord(url, wordGuess) {
+        isLoading = true
+        setLoading(isLoading)
+        try {
+            const response = await fetch(url, {
+                method: "POST", 
+                body: JSON.stringify({
+                    word: wordGuess
+                })
+            })
+            const validation = await response.json()
+            return validation
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    
+    function setValidation(validation) {
+        valid = validation
+        isLoading = false
+        setLoading(isLoading)
+        return valid
+    }
+
+    function getPosition(word, letter, index) {
+        return word.split(letter, index).join(letter).length
+    }
+    
+    const countOccurences = (word, search) => {
+        return word.split(search).length - 1
+    }
+}
+
+// Function to test wether the user is typing a single letter
+function isLetter(letter) {
+    return /^[a-zA-Z]$/.test(letter)
+}
+
+function startClick(){
+    document.querySelector(".pop-up").style.display = "none"
+}
+
+function closeWinningPopup() {
+    document.querySelector(".winning").style.display = "none"
+}
+
+function closeLosingPopup() {
+    document.querySelector(".lost").style.display = "none"
+}
+
+function setLoading(isLoading) {
+    if (isLoading) {
+        loadingDiv.style.display = "block"
+    } else if (!isLoading) {
+        loadingDiv.style.display = "none"
     }
 }
 
