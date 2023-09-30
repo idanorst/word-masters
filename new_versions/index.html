@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Masters</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="word.png">
+</head>
+<body>
+    <header>
+        <h1 class="header">Word Masters</h1>
+    </header>
+    <main class="guess-board">
+        <div class="info-bar">
+            <div class="spiral">🌀</div>
+        </div>
+        <div class="pop-up">
+            <p>Welcome to this game 🎲</p>
+            <p>The goal for the game is to guess the right word. You have 6 tries in total.</p>
+            <p>The different letters will be colored differently after each try:</p>
+            <div class="color-box">
+                <div class="box all-correct"></div>
+                <div class="box correct-letter"></div>
+                <div class="box wrong"></div>
+                <div class="box invalid"></div>
+            </div>
+            <p>The <span class="green">green</span> color means that the letter is correct and in the correct position. The <span class="yellow">yellow</span> means that the letter is correct, but in wrong position. The <span class="grey">grey</span> means that the letter is wrong, and the <span class="red">red</span> border means that the word is not valid.</p>
+            <p>Good luck!</p>
+            <div class="button-box">
+                <button class="start-btn">Let's get started!</button>
+            </div>
+        </div>
+        <div class="result-popup winning">
+            <button class='close-button' onclick=closeWinningPopup()>
+                &times;
+            </button>
+            <p>Congrats, you won!</p>
+            <p class="smiley">🥳</p>
+        </div>
+        <div class="result-popup lost">
+            <button class='close-button' onclick=closeLosingPopup()>
+                &times;
+            </button>
+            <p>I'm sorry, you lost.</p>
+            <p class="smiley">😿</p>
+            <p>The correct word was <span class="correct-word"></span>.</p>
+        </div>
+        <div class="scoreboard">
+            <div class="row-numbers">
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+                <p>6</p>
+            </div>
+            <div class="word-container">
+                <div class="letter-box" id="0"></div>
+                <div class="letter-box" id="1"></div>
+                <div class="letter-box" id="2"></div>
+                <div class="letter-box" id="3"></div>
+                <div class="letter-box" id="4"></div>
+                <div class="letter-box" id="5"></div>
+                <div class="letter-box" id="6"></div>
+                <div class="letter-box" id="7"></div>
+                <div class="letter-box" id="8"></div>
+                <div class="letter-box" id="9"></div>
+                <div class="letter-box" id="10"></div>
+                <div class="letter-box" id="11"></div>
+                <div class="letter-box" id="12"></div>
+                <div class="letter-box" id="13"></div>
+                <div class="letter-box" id="14"></div>
+                <div class="letter-box" id="15"></div>
+                <div class="letter-box" id="16"></div>
+                <div class="letter-box" id="17"></div>
+                <div class="letter-box" id="18"></div>
+                <div class="letter-box" id="19"></div>
+                <div class="letter-box" id="20"></div>
+                <div class="letter-box" id="21"></div>
+                <div class="letter-box" id="22"></div>
+                <div class="letter-box" id="23"></div>
+                <div class="letter-box" id="24"></div>
+                <div class="letter-box" id="25"></div>
+                <div class="letter-box" id="26"></div>
+                <div class="letter-box" id="27"></div>
+                <div class="letter-box" id="28"></div>
+                <div class="letter-box" id="29"></div>
+            </div>
+        </div>
+    </main>
+    <script src="wordle.js"></script>
+</body>
+</html>

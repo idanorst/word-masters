@@ -24,8 +24,12 @@ async function init() {
     const startButton = document.querySelector(".start-btn")
     startButton.addEventListener("click", startClick)
 
-    const container = document.getElementsByClassName("word-container")[0]
+    
+
+    const letters = document.querySelectorAll("letter-box")
+    console.log(letters)
     container.onkeyup = function(e) {
+        console.log(e)
         if (done) {
             return
         }
@@ -46,14 +50,15 @@ async function init() {
             }
             if (target.parentNode.nextElementSibling != null && target.parentNode.nextElementSibling.children[0].value != "") {
                 let tempDict = {}
-                if (value4 != '') {
+                if (value4 != null) {
                     tempDict[4] = value4
                     for (let i = 0; i < 4; i++) {
                         tempDict[i] = target.parentNode.parentNode.children[i].children[0].value
                     }
                 } else {
                     for (let i = 0; i < 5; i++) {
-                        tempDict[i] = target.parentNode.parentNode.children[i].children[0].value   
+                        tempDict[i] = target.parentNode.parentNode.children[i].children[0].value
+                        
                     }
                 }
                 guessedWord = ''
@@ -61,12 +66,10 @@ async function init() {
                     guessedWord += tempDict[i]
                 }
             } else if (guessedWord.length < 5) {
-                if (guessedWord.length === 4 && parseInt(target.id) === 3) {
-                    // do nothing
-                } else {
-                    guessedWord += target.value.toLowerCase()
-                }
+                console.log(value4)
+                guessedWord += target.value.toLowerCase()
             }
+            console.log(guessedWord)
             if (guessedWord.length === 5) {
                 let marked = {}
                 for (let i = 0; i < guessedWord.length; i++) {
@@ -100,7 +103,7 @@ async function init() {
                     }
                     
                 }
-            }
+            }/*  else { */
             count = Object.keys(letterDict).length
             
             if (!isLetter(e.key)) {
@@ -121,16 +124,13 @@ async function init() {
                         valid = data.validWord
                         if (!valid) {
                             for (let i = 0; i < 5; i++) {
-                                if (parentNode.children[i].children[0].classList.contains("not-valid")) {
-                                    (parentNode.children[i].children[0].classList.remove("not-valid"))
-                                }
-                                setTimeout(function() {
-                                    parentNode.children[i].children[0].classList.add("not-valid")
-                                }, 300)
-                                
+                                parentNode.children[i].children[0].classList.add("not-valid")
                             }
                         } else {
                             for (let i = 0; i < 5; i++) {
+                                if (parentNode.children[i].children[0].classList.contains("not-valid")) {
+                                    parentNode.children[i].children[0].classList.remove("not-valid")
+                                }
                                 if (letterDict[i] === "ac"){
                                     parentNode.children[i].children[0].classList.add("all-correct")
                                 } else if (letterDict[i] === "cl") {
@@ -236,3 +236,4 @@ function setLoading(isLoading) {
 }
 
 init()
+
