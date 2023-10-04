@@ -17,6 +17,7 @@ header {
     height: 6rem;
     border-bottom: 2px solid black;
     font-size: 0.8rem;
+    background-color: rgb(126, 125, 125);
 }
 
 p {
@@ -35,6 +36,7 @@ p {
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
+    margin-top: 1rem;
     padding: 2rem;
 }
 
@@ -77,15 +79,21 @@ p {
 .guess-board {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100vh;
+    background-color: #e4e3e3;
 }
 
 .table-container {
     display: flex;
     flex-direction: row;
     width: 350px;
+    background-color: whitesmoke;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .row-numbers {
@@ -94,7 +102,6 @@ p {
     justify-content: space-between;
     align-items: center;
     width: 30px;
-    margin-top: 3rem;
     padding-top: 1rem;
     padding-bottom: 1.5rem;
 }
@@ -105,7 +112,6 @@ p {
 }
 
 .word-container {
-    margin-top: 3rem;
     width: 300px;
 }
 
@@ -194,8 +200,9 @@ input[type=text]:focus {
     align-items: center;
     text-align: center;
     position: absolute;
-    width: 350px;
-    height: 150px;
+    top: 10rem;
+    width: 400px;
+    height: 200px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
@@ -206,12 +213,14 @@ input[type=text]:focus {
     display: none;
 }
 
-.winning > p {
+.info {
     margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
 }
 
 .smiley {
-    font-size: 3rem;
+    font-size: 3.5rem;
+    margin-top: 1rem;
 }
 
 .lost {
@@ -232,11 +241,6 @@ input[type=text]:focus {
     font-size: 1.5rem;
     cursor: pointer;
 }
-  
-/* .close-button:hover {
-    opacity: 0.8;
-    cursor: pointer;
-} */
 
 .correct-word {
     font-weight: bold;
@@ -249,9 +253,11 @@ input[type=text]:focus {
 
 .info-bar {
     position: absolute;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+    top: 15rem;
+}
+
+.winning-letter {
+    animation: shining 2s linear infinite;
 }
 
 @keyframes spin {
@@ -305,5 +311,17 @@ input[type=text]:focus {
     }
     100% {
         border-color: #ccc;
+    }
+}
+
+@keyframes shining {
+    0% {
+        background-color: green;
+    }
+    50% {
+        background-color: darkgreen;
+    }
+    100% {
+        background-color: green;
     }
 }
