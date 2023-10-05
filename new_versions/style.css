@@ -36,6 +36,7 @@ p {
     border: 1px solid black;
     border-radius: 10px;
     padding: 2rem;
+    margin-top: 2rem;
 }
 
 .color-box {
@@ -88,12 +89,6 @@ p {
     width: 350px;
 }
 
-/* .table-container {
-    display: flex;
-    flex-direction: row;
-    width: 350px;
-} */
-
 .row-numbers {
     display: flex;
     flex-direction: column;
@@ -117,22 +112,6 @@ p {
     column-gap: 0.5rem;
     width: 300px;
 }
-
-/* .word-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-input[type=text] {
-    text-align: center;
-    caret-color: transparent;
-}
-
-input[type=text]:focus {
-    outline: none;
-    text-align: center;
-} */
 
 .letter-box {
     display: flex;
@@ -163,7 +142,7 @@ input[type=text]:focus {
 }
 
 .not-valid {
-    animation: flash 1s;
+    animation: flash 1.5s;
 }
 
 .invalid {
@@ -241,11 +220,6 @@ input[type=text]:focus {
     font-size: 1.5rem;
     cursor: pointer;
 }
-  
-/* .close-button:hover {
-    opacity: 0.8;
-    cursor: pointer;
-} */
 
 .correct-word {
     font-weight: bold;
@@ -258,9 +232,7 @@ input[type=text]:focus {
 
 .info-bar {
     position: absolute;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+    top: 15rem;
 }
 
 @keyframes spin {
